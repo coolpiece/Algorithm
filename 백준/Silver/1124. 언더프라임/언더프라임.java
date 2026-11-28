@@ -3,15 +3,16 @@ import java.util.*;
 
 public class Main {
 	static boolean[] isNotPrime = new boolean[100000];
+	
 	public static void main(String args[]) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
 
 		int a = Integer.parseInt(st.nextToken()), b = Integer.parseInt(st.nextToken()), cnt = 0;
 		notPrime();
+		
 		for(int i=a; i<=b; i++) {
-			int primeCnt = prime(i);
-			if(!isNotPrime[primeCnt]) cnt++;
+			if(!isNotPrime[prime(i)]) cnt++;
 		}
 		System.out.println(cnt);
 	}
@@ -27,14 +28,14 @@ public class Main {
 	}
 
 	public static int prime(int n) {
-		List<Integer> list = new ArrayList<>();
+		int cnt = 0;
 		for(int i = 2; i*i <=n; i++) {
 			while(n % i == 0) {
-				list.add(i);
+				cnt++;
 				n /= i;
 			}
 		}
-		if(n > 1) list.add(n);
-		return list.size();
+		if(n > 1) cnt++;
+		return cnt;
 	}
 }
